@@ -10,6 +10,17 @@ gameLoop s = do
     clearScreen
     setCursorPosition 0 0
     putStrLn (displayLevel (level s))
+    action <- getChar
+    case action of
+        'q' -> do
+            clearScreen
+            setCursorPosition 0 0
+            putStrLn "Really quit? (y/n)"
+            action <- getChar
+            if action == 'y'
+                then clearScreen
+                else gameLoop s
+        _ -> gameLoop s
 
 newtype State = State {
         level :: Level

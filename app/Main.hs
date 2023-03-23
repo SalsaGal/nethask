@@ -1,6 +1,9 @@
 module Main where
 
 import Game
+import System.IO (hSetBuffering, BufferMode (NoBuffering), stdin)
 
 main :: IO ()
-main = gameLoop newState
+main = do
+    hSetBuffering stdin NoBuffering
+    gameLoop newState
