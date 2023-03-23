@@ -4,7 +4,8 @@ module Game
 ) where
 
 import System.Console.ANSI (clearScreen, setCursorPosition)
-import Player (Player)
+import Player (Player, newPlayer)
+import Maths (Vec2(Vec2, x, y))
 
 gameLoop :: State -> IO ()
 gameLoop s = do
@@ -37,7 +38,8 @@ newState = State {
                     [Grass, Stone, Stone]
                 ]
             }
-        ]
+        ],
+        player=newPlayer (Vec2 {x=0, y=0})
     }
 
 data Level = Level {
