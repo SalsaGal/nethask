@@ -9,7 +9,7 @@ gameLoop :: State -> IO ()
 gameLoop s = do
     clearScreen
     setCursorPosition 0 0
-    putStrLn (displayLevel (level s))
+    putStrLn (displayLevel (head (levels s)))
     action <- getChar
     case action of
         'q' -> do
@@ -23,16 +23,18 @@ gameLoop s = do
         _ -> gameLoop s
 
 newtype State = State {
-        level :: Level
+        levels :: [Level]
     } deriving Show
 
 newState :: State
-newState = State {level=Level {
-        grounds=[
-            [Grass, Grass, Stone],
-            [Grass, Stone, Stone]
-        ]
-    }}
+newState = State {levels=[
+        Level {
+            grounds=[
+                [Grass, Grass, Stone],
+                [Grass, Stone, Stone]
+            ]
+        }
+    ]}
 
 newtype Level = Level {
         grounds :: [[Ground]]
