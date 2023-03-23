@@ -4,6 +4,7 @@ module Game
 ) where
 
 import System.Console.ANSI (clearScreen, setCursorPosition)
+import Player (Player)
 
 gameLoop :: State -> IO ()
 gameLoop s = do
@@ -22,21 +23,24 @@ gameLoop s = do
                 else gameLoop s
         _ -> gameLoop s
 
-newtype State = State {
-        levels :: [Level]
+data State = State {
+        levels :: [Level],
+        player :: Player
     } deriving Show
 
 newState :: State
-newState = State {levels=[
-        Level {
-            grounds=[
-                [Grass, Grass, Stone],
-                [Grass, Stone, Stone]
-            ]
-        }
-    ]}
+newState = State {
+        levels=[
+            Level {
+                grounds=[
+                    [Grass, Grass, Stone],
+                    [Grass, Stone, Stone]
+                ]
+            }
+        ]
+    }
 
-newtype Level = Level {
+data Level = Level {
         grounds :: [[Ground]]
     } deriving Show
 
