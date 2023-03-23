@@ -23,7 +23,7 @@ newtype Level = Level {
     } deriving Show
 
 displayLevel :: Level -> String
-displayLevel level = map groundChar (head (grounds level))
+displayLevel level = foldl (\acc line -> acc ++ line ++ "\n") "" (map (map groundChar) (grounds level))
 
 data Ground = Grass | Stone deriving Show
 
