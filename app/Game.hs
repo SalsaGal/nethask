@@ -1,21 +1,31 @@
-module Game where
+module Game
+( gameLoop
+, newState
+) where
 
-gameLoop :: State -> State
+gameLoop :: State -> IO ()
+gameLoop s = putStrLn (displayLevel (level s))
 
-data State = State {
+newtype State = State {
         level :: Level
-    }
+    } deriving Show
 
 newState :: State
 newState = State {level=Level {
-        grounds=[[Grass]]
+        grounds=[
+            [Grass, Grass, Stone],
+            [Grass, Stone, Stone]
+        ]
     }}
 
-data Level = Level {
+newtype Level = Level {
         grounds :: [[Ground]]
-    }
+    } deriving Show
 
-data Ground = Grass | Stone
+displayLevel :: Level -> String
+displayLevel level = map groundChar (head (grounds level))
+
+data Ground = Grass | Stone deriving Show
 
 groundChar :: Ground -> Char
 groundChar Grass = '"'

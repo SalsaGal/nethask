@@ -3,4 +3,4 @@ module Main where
 import Game
 
 main :: IO ()
-main = putStrLn "Foo"
+main = gameLoop newState
