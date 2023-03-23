@@ -3,8 +3,10 @@ module Game
 , newState
 ) where
 
+import System.Console.ANSI (clearScreen)
+
 gameLoop :: State -> IO ()
-gameLoop s = putStrLn (displayLevel (level s))
+gameLoop s = clearScreen >> putStrLn (displayLevel (level s))
 
 newtype State = State {
         level :: Level
